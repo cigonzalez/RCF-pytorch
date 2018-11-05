@@ -8,11 +8,11 @@ def dice_loss_RCF(prediction, label):
     smooth = 1.
     iflat = prediction.view(-1) 
     tflat = label.view(-1) 
+
+    # Ignore 2-labels 
     mask = tflat.lt(2)
     iflat = torch.masked_select(iflat, mask)
     tflat = torch.masked_select(tflat, mask)
-
-    pdb.set_trace()
     intersection = (iflat * tflat).sum()
     return 1 - ((2. * intersection + smooth) / (iflat.sum() + tflat.sum() + smooth))
 
