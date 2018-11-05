@@ -85,7 +85,7 @@ def main():
     model.cuda()
     model.apply(weights_init)
     model_dict = model.state_dict() 
-    state_dict = torch.load('./models/vgg16.pth') 
+    state_dict = torch.load('./model/vgg16.pth') 
     pretrained_dict = {k: v for k, v in state_dict.items() if k in model_dict} 
     model_dict.update(pretrained_dict) 
     model.load_state_dict(model_dict)
