@@ -84,7 +84,12 @@ def main():
     model = RCF()
     model.cuda()
     model.apply(weights_init)
-    load_vgg16pretrain(model)
+    model_dict = model.state_dict() 
+    state_dict = torch.load('./models/vgg16.pth') 
+    pretrained_dict = {k: v for k, v in state_dict.items() if k in model_dict} 
+    model_dict.update(pretrained_dict) 
+    model.load_state_dict(model_dict)
+
     if args.resume:
         if isfile(args.resume): 
             print("=> loading checkpoint '{}'".format(args.resume))
