@@ -4,7 +4,7 @@ from torch.optim.optimizer import Optimizer, required
 import pdb
 # loss function
 
-def dice_loss(prediction, label): 
+def dice_loss_RCF(prediction, label): 
     smooth = 1.
     iflat = prediction.view(-1) 
     tflat = label.view(-1) 
