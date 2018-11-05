@@ -1,7 +1,16 @@
 import numpy as np
 import torch
 from torch.optim.optimizer import Optimizer, required
+import pdb
 # loss function
+
+def dice_loss(prediction, label): 
+    smooth = 1.
+    iflat = prediction.view(-1) 
+    tflat = label.view(-1) 
+    pdb.set_trace()
+    intersection = (iflat * tflat).sum()
+    return 1 - ((2. * intersection + smooth) / (iflat.sum() + tflat.sum() + smooth))
 
 def cross_entropy_loss_RCF(prediction, label):
     label = label.long()
